@@ -23,7 +23,6 @@ int main(int argc, char **argv)
 		dprintf(STDERR_FILENO, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
 	fp = fopen(argv[1], "r");
 	if (!fp)
 	{
@@ -31,13 +30,17 @@ int main(int argc, char **argv)
 			argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
 	while (fgets(buf, sizeof(buf), fp))
 	{
 		token = strtok(buf, " ");
 		token2 = strtok(NULL, " ");
 		if (token2)
-			argument = atoi(token2);
+		{
+			if (isdigit(token2[0]))
+				argument = atoi(token2);
+			else
+				argument = -7777;
+		}
 		else
 			argument = -7777;
 		if (token[0] != '\n')
@@ -45,7 +48,6 @@ int main(int argc, char **argv)
 						       line_number);
 		line_number++;
 	}
-
 	free_all(&stack);
 	fclose(fp);
 	return (EXIT_SUCCESS);
