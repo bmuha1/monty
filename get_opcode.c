@@ -26,8 +26,8 @@ void (*get_opcode(stack_t **st, char *s, int lnum))(stack_t **, unsigned int)
 		{"pchar", op_pchar},
 		{"pstr", op_pstr},
 		{"rotl", op_rotl},
+		{"rotr", op_rotr},
 /*
- *		{"rotr", op_rotr},
  *		{"stack", op_stack},
  *		{"queue", op_queue},
  */
