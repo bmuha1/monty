@@ -23,6 +23,14 @@ void (*get_opcode(stack_t **st, char *s, int lnum))(stack_t **, unsigned int)
 		{"mul", op_mul},
 		{"mod", op_mod},
 		{"#", op_nop},
+		{"pchar", op_pchar},
+		{"pstr", op_pstr},
+		{"rotl", op_rotl},
+/*
+ *		{"rotr", op_rotr},
+ *		{"stack", op_stack},
+ *		{"queue", op_queue},
+ */
 		{NULL, NULL}
 	};
 	int i = 0;
