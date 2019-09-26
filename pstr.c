@@ -15,7 +15,8 @@ void op_pstr(stack_t **stack, unsigned int line_number)
 	{
 		if (curr->n > 0 && curr->n < 128)
 		{
-			putchar(curr->n);
+			if (curr->n > 31)
+				putchar(curr->n);
 			curr = curr->next;
 		}
 		else
