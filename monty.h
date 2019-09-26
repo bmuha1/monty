@@ -13,10 +13,12 @@
 /**
  * struct global_s - file pointer and argument
  * @fp: file pointers
+ * @queue: 0 if stack (LIFO), 1 if queue (FIFO)
  */
 typedef struct global_s
 {
 	FILE *fp;
+	int queue;
 } global_t;
 
 /**
@@ -69,11 +71,13 @@ void op_pchar(stack_t **stack, unsigned int line_number);
 void op_pstr(stack_t **stack, unsigned int line_number);
 void op_rotl(stack_t **stack, unsigned int line_number);
 void op_rotr(stack_t **stack, unsigned int line_number);
-/*
- * void op_stack(stack_t **stack, unsigned int line_number);
- * void op_queue(stack_t **stack, unsigned int line_number);
- */
+void op_stack(stack_t **stack, unsigned int line_number);
+void op_queue(stack_t **stack, unsigned int line_number);
+
 void push_error(stack_t **stack, unsigned int line_number);
+void add_node(stack_t **stack, int argument);
+void add_node_end(stack_t **stack, int argument);
+
 void free_all(stack_t **stack);
 void close_fp(void);
 

@@ -7,7 +7,6 @@
  */
 void op_push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new;
 	char arg[128] = "";
 	char *arg_p = arg;
 	int argument;
@@ -28,6 +27,35 @@ void op_push(stack_t **stack, unsigned int line_number)
 	}
 	else
 		push_error(stack, line_number);
+
+	if (global.queue)
+		add_node_end(stack, argument);
+	else
+		add_node(stack, argument);
+}
+
+/**
+ * push_error - Print an error message and exit
+ * @stack: The stack
+ * @line_number: The line number
+ */
+void push_error(stack_t **stack, unsigned int line_number)
+{
+	dprintf(STDERR_FILENO, "L%u: usage: push integer\n",
+		line_number);
+	free_all(stack);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * add_node - Add a node on top of the stack
+ * @stack: The stack
+ * @argument: The argument to add
+ */
+void add_node(stack_t **stack, int argument)
+{
+	stack_t *new;
+
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
@@ -44,14 +72,34 @@ void op_push(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * push_error - Print an error message and exit
+ * add_node_end - Add a node to the end of the queue
  * @stack: The stack
- * @line_number: The line number
+ * @argument: The argument to add
  */
-void push_error(stack_t **stack, unsigned int line_number)
+void add_node_end(stack_t **stack, int argument)
 {
-	dprintf(STDERR_FILENO, "L%u: usage: push integer\n",
-		line_number);
-	free_all(stack);
-	exit(EXIT_FAILURE);
+	stack_t *last = *stack;
+	stack_t *new;
+
+	new = malloc(sizeof(stack_t));
+	if (!new)
+	{
+		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		free_all(stack);
+		exit(EXIT_FAILURE);
+	}
+	new->n = argument;
+	new->next = NULL;
+
+	if (*stack == NULL)
+	{
+		new->prev = NULL;
+		*stack = new;
+		return;
+	}
+
+	while (last->next)
+		last = last->next;
+	last->next = new;
+	new->prev = last;
 }
