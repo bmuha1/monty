@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 	}
 	while (fgets(buf, sizeof(buf), global.fp))
 	{
-		token = strtok(buf, " ");
+		token = strtok(buf, " \t");
 		if (token[0] != '\n')
 			get_opcode(&stack, token, line_number)(&stack,
 				   line_number);

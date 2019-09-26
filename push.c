@@ -12,7 +12,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	char *arg_p = arg;
 	int argument;
 
-	arg_p = strtok(NULL, " ");
+	arg_p = strtok(NULL, " \t");
 	if (arg_p)
 	{
 		if (isdigit(arg_p[0]))
