@@ -10,29 +10,21 @@ void op_push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	char arg[128] = "";
 	char *arg_p = arg;
-	int argument;
+	int argument, i;
 
 	arg_p = strtok(NULL, " \t");
 	if (arg_p)
 	{
-		if (isdigit(arg_p[0]) || (arg_p[0] == '-' &&
-					  isdigit(arg_p[1])))
-			argument = atoi(arg_p);
-		else
+		for (i = 0; arg_p[i] != '\0'; i++)
 		{
-			dprintf(STDERR_FILENO,
-				"L%u: usage: push integer\n", line_number);
-			free_all(stack);
-			exit(EXIT_FAILURE);
+			if (!isdigit(arg_p[i]) && arg_p[0] != '-' &&
+			    arg_p[i] != '\n')
+				push_error(stack, line_number);
 		}
+		argument = atoi(arg_p);
 	}
 	else
-	{
-		dprintf(STDERR_FILENO, "L%u: usage: push integer\n",
-			line_number);
-		free_all(stack);
-		exit(EXIT_FAILURE);
-	}
+		push_error(stack, line_number);
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
@@ -46,4 +38,17 @@ void op_push(stack_t **stack, unsigned int line_number)
 	if (*stack)
 		(*stack)->prev = new;
 	*stack = new;
+}
+
+/**
+ * push_error - Print an error message and exit
+ * @stack: The stack
+ * @line_number: The line number
+ */
+void push_error(stack_t **stack, unsigned int line_number)
+{
+	dprintf(STDERR_FILENO, "L%u: usage: push integer\n",
+		line_number);
+	free_all(stack);
+	exit(EXIT_FAILURE);
 }

@@ -73,6 +73,7 @@ void op_rotr(stack_t **stack, unsigned int line_number);
  * void op_stack(stack_t **stack, unsigned int line_number);
  * void op_queue(stack_t **stack, unsigned int line_number);
  */
+void push_error(stack_t **stack, unsigned int line_number);
 void free_all(stack_t **stack);
 void close_fp(void);
 
