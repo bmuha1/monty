@@ -76,6 +76,6 @@ void op_rotr(stack_t **stack, unsigned int line_number);
  * void op_queue(stack_t **stack, unsigned int line_number);
  */
 void free_all(stack_t **stack);
-void __attribute__((destructor)) close_fp(void);
+void close_fp(void);
 
 #endif /* MONTY_H */

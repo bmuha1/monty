@@ -14,6 +14,8 @@ void free_all(stack_t **stack)
 		*stack = (*stack)->next;
 		free(temp);
 	}
+
+	close_fp();
 }
 
 /**
