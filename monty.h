@@ -18,7 +18,6 @@
 typedef struct global_s
 {
 	FILE *fp;
-	int argument;
 } global_t;
 
 /**

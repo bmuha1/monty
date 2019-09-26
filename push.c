@@ -8,13 +8,22 @@
 void op_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
+	char arg[128] = "";
+	char *arg_p = arg;
+	int argument;
 
-	if (global.argument == -7777)
+	arg_p = strtok(NULL, " ");
+	if (arg_p)
 	{
-		dprintf(STDERR_FILENO, "L%u: usage: push integer\n",
-			line_number);
-		free_all(stack);
-		exit(EXIT_FAILURE);
+		if (isdigit(arg_p[0]))
+			argument = atoi(arg_p);
+		else
+		{
+			dprintf(STDERR_FILENO,
+				"L%u: usage: push integer\n", line_number);
+			free_all(stack);
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	new = malloc(sizeof(stack_t));
@@ -25,7 +34,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new->n = global.argument;
+	new->n = argument;
 	new->next = *stack;
 	new->prev = NULL;
 	if (*stack)
