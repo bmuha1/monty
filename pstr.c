@@ -7,14 +7,16 @@
  */
 void op_pstr(stack_t **stack, unsigned int line_number)
 {
+	stack_t *curr = *stack;
+
 	(void) line_number;
 
-	while (*stack)
+	while (curr)
 	{
-		if ((*stack)->n > 0 && (*stack)->n < 128)
+		if (curr->n > 0 && curr->n < 128)
 		{
-			putchar((*stack)->n);
-			*stack = (*stack)->next;
+			putchar(curr->n);
+			curr = curr->next;
 		}
 		else
 			break;
