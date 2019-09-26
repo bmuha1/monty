@@ -10,17 +10,23 @@ void op_push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	char arg[128] = "";
 	char *arg_p = arg;
-	int argument, i;
+	int argument;
+	unsigned int i;
 
 	arg_p = strtok(NULL, " \t");
 	if (arg_p)
 	{
-		for (i = 0; arg_p[i] != '\0'; i++)
+		if (arg_p[0] == '\n')
+			push_error(stack, line_number);
+		for (i = 0; i < strlen(arg_p); i++)
 		{
 			if (!isdigit(arg_p[i]) && arg_p[0] != '-' &&
 			    arg_p[i] != '\n')
 				push_error(stack, line_number);
 		}
+/*		if (!isdigit(arg_p[0]) && arg_p[0] != '-' &&
+		    !isdigit(arg_p[1]))
+*/
 		argument = atoi(arg_p);
 	}
 	else

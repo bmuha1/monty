@@ -37,7 +37,7 @@ void (*get_opcode(stack_t **st, char *s, int lnum))(stack_t **, unsigned int)
 
 	while (ops[i].opcode)
 	{
-		if (strncmp(ops[i].opcode, s, strlen(ops[i].opcode)) == 0)
+		if (strcmp(ops[i].opcode, s) == 0)
 			return (ops[i].f);
 		i++;
 	}
