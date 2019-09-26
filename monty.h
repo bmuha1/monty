@@ -13,7 +13,6 @@
 /**
  * struct global_s - file pointer and argument
  * @fp: file pointers
- * @argument: argument
  */
 typedef struct global_s
 {
