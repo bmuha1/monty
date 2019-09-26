@@ -12,8 +12,10 @@ global_t global = {NULL, -7777};
 int main(int argc, char **argv)
 {
 	char buf[1024];
-	char *token = NULL;
-	char *token2 = NULL;
+	char t[128] = "";
+	char t2[128] = "";
+	char *token = t;
+	char *token2 = t2;
 	stack_t *stack = NULL;
 	unsigned int line_number = 1;
 
