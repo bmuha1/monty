@@ -26,7 +26,13 @@ void op_push(stack_t **stack, unsigned int line_number)
 			exit(EXIT_FAILURE);
 		}
 	}
-
+	else
+	{
+		dprintf(STDERR_FILENO, "L%u: usage: push integer\n",
+			line_number);
+		free_all(stack);
+		exit(EXIT_FAILURE);
+	}
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
@@ -34,7 +40,6 @@ void op_push(stack_t **stack, unsigned int line_number)
 		free_all(stack);
 		exit(EXIT_FAILURE);
 	}
-
 	new->n = argument;
 	new->next = *stack;
 	new->prev = NULL;
