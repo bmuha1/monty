@@ -9,7 +9,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
 
-	if (argument == -7777)
+	if (global.argument == -7777)
 	{
 		dprintf(STDERR_FILENO, "L%u: usage: push integer\n",
 			line_number);
@@ -25,7 +25,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new->n = argument;
+	new->n = global.argument;
 	new->next = *stack;
 	new->prev = NULL;
 	if (*stack)

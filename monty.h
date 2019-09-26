@@ -10,7 +10,16 @@
 #include <string.h>
 #include <ctype.h>
 
-extern int argument;
+/**
+ * struct global_s - file pointer and argument
+ * @fp: file pointers
+ * @argument: argument
+ */
+typedef struct global_s
+{
+	FILE *fp;
+	int argument;
+} global_t;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -42,6 +51,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern global_t global;
+
 ssize_t read_textfile(const char *filename, size_t letters);
 
 void (*get_opcode(stack_t **, char *, int))(stack_t **, unsigned int);
@@ -65,5 +76,6 @@ void op_rotr(stack_t **stack, unsigned int line_number);
  * void op_queue(stack_t **stack, unsigned int line_number);
  */
 void free_all(stack_t **stack);
+void __attribute__((destructor)) close_fp(void);
 
 #endif /* MONTY_H */

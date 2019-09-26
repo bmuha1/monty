@@ -15,3 +15,11 @@ void free_all(stack_t **stack)
 		free(temp);
 	}
 }
+
+/**
+ * close_fp - Close the file pointer
+ */
+void close_fp(void)
+{
+	fclose(global.fp);
+}
