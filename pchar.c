@@ -14,7 +14,7 @@ void op_pchar(stack_t **stack, unsigned int line_number)
 		free_all(stack);
 		exit(EXIT_FAILURE);
 	}
-	else if ((*stack)->n < 0 || (*stack)->n > 127)
+	else if ((*stack)->n < 32 || (*stack)->n > 127)
 	{
 		dprintf(STDERR_FILENO,
 			"L%u: can't pchar, value out of range\n",
