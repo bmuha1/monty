@@ -24,9 +24,6 @@ void op_push(stack_t **stack, unsigned int line_number)
 			    arg_p[i] != '\n')
 				push_error(stack, line_number);
 		}
-/*		if (!isdigit(arg_p[0]) && arg_p[0] != '-' &&
-		    !isdigit(arg_p[1]))
-*/
 		argument = atoi(arg_p);
 	}
 	else
